@@ -41,6 +41,11 @@ Modify the following options in **./Model/"Model_Name"/config.yml**.
 <hr/>
 
 # Test
+
+## Pretrained Parameters:
+Link: [Download](https://yonsei-my.sharepoint.com/:f:/g/personal/chajin_o365_yonsei_ac_kr/EgzjXXdvMXBEpm2HMInAoGEBhXrlxLqaEIRKZu-G5mTBoQ?e=rvZstg)
+
+## Setting
 Modify the following options in **./Model/"Model_Name"/config.yml**.
 - mode:  'test' for test
 - folder_dir:  dataset directory of test
