@@ -24,7 +24,7 @@ test_dataset:
 
 model:
   # parameter
-  params: './codec_exp/ckpt/HP+EASN-deep_0.005.pth'
+  params: './codec_exp/ckpt/HP+EASN_deep_0.005.pth'
   N: 128
   M: 192
 
@@ -38,7 +38,7 @@ train:
   factor: 0.5
   patience: 10
   threshold: 1e-4
-  load_optimizer: True
+  load_optimizer: False
   distortion: 'mse'   # 'mse' or 'ms-ssim'
 
 

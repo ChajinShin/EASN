@@ -116,9 +116,9 @@ class CompressionModel(nn.Module):
         super().load_state_dict(state_dict)
 
 
-class GAS(nn.Module):
+class EASN(nn.Module):
     def __init__(self, ch_num):
-        super(GAS, self).__init__()
+        super(EASN, self).__init__()
         self.main_conv = nn.Conv2d(ch_num, ch_num, 1, 1, 0)
         self.scale_conv = nn.Sequential(
             nn.Conv2d(ch_num, ch_num, 3, 1, 1),
@@ -131,29 +131,29 @@ class GAS(nn.Module):
         return out
 
 
-class HP_GAS(CompressionModel):
+class HP_EASN(CompressionModel):
     def __init__(self, N=128, M=192):
-        super(HP_GAS, self).__init__(N)
+        super(HP_EASN, self).__init__(N)
         self.N = N
         self.M = M
 
         self.g_a = nn.Sequential(
             conv(3, N),
-            GAS(N),
+            EASN(N),
             conv(N, N),
-            GAS(N),
+            EASN(N),
             conv(N, N),
-            GAS(N),
+            EASN(N),
             conv(N, M),
         )
 
         self.g_s = nn.Sequential(
             deconv(M, N),
-            GAS(N),
+            EASN(N),
             deconv(N, N),
-            GAS(N),
+            EASN(N),
             deconv(N, N),
-            GAS(N),
+            EASN(N),
             deconv(N, 3),
         )
 

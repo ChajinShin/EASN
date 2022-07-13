@@ -2,11 +2,7 @@ from math import log
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import warnings
-from compressai.ans import BufferedRansEncoder, RansDecoder
 from compressai.entropy_models import EntropyBottleneck, GaussianConditional
-from compressai.layers import GDN
 
 
 def conv(in_channels, out_channels, kernel_size=5, stride=2):
@@ -139,9 +135,9 @@ class CompressionModel(nn.Module):
         super().load_state_dict(state_dict)
 
 
-class GAS(nn.Module):
+class EASN(nn.Module):
     def __init__(self, ch_num):
-        super(GAS, self).__init__()
+        super(EASN, self).__init__()
         self.main_conv = nn.Conv2d(ch_num, ch_num, 5, 1, 2)
         self.scale_conv = nn.Sequential(
             nn.Conv2d(ch_num, ch_num, 3, 1, 1),
@@ -156,9 +152,9 @@ class GAS(nn.Module):
         return out
 
 
-class GAS_deep_enc(nn.Module):
+class EASN_deep_enc(nn.Module):
     def __init__(self, in_ch, out_ch):
-        super(GAS_deep_enc, self).__init__()
+        super(EASN_deep_enc, self).__init__()
         self.main_conv = nn.Conv2d(in_ch, out_ch, 5, 2, 2)
 
         self.scale_conv = nn.Sequential(
@@ -167,18 +163,18 @@ class GAS_deep_enc(nn.Module):
             nn.Conv2d(out_ch, out_ch, 3, 1, 1)
         )
         self.skip_conv = nn.Conv2d(in_ch, out_ch, 1, 2, 0)
-        self.gas = GAS(out_ch)
+        self.easn = EASN(out_ch)
 
     def forward(self, x):
         scale = torch.sigmoid(self.scale_conv(x))
         x = self.main_conv(x) * scale + self.skip_conv(x)
-        x = self.gas(x)
+        x = self.easn(x)
         return x
 
 
-class GAS_deep_dec(nn.Module):
+class EASN_deep_dec(nn.Module):
     def __init__(self, in_ch, out_ch):
-        super(GAS_deep_dec, self).__init__()
+        super(EASN_deep_dec, self).__init__()
         self.main_conv = nn.ConvTranspose2d(in_ch, out_ch, 5, 2, 2, 1)
 
         self.scale_conv = nn.Sequential(
@@ -187,32 +183,32 @@ class GAS_deep_dec(nn.Module):
             nn.Conv2d(out_ch, out_ch, 3, 1, 1)
         )
         self.skip_conv = nn.ConvTranspose2d(in_ch, out_ch, 3, 2, 1, 1)
-        self.gas = GAS(out_ch)
+        self.easn = EASN(out_ch)
 
     def forward(self, x):
         scale = torch.sigmoid(self.scale_conv(x))
         x = self.main_conv(x) * scale + self.skip_conv(x)
-        x = self.gas(x)
+        x = self.easn(x)
         return x
 
 
-class HP_GAS_deep(CompressionModel):
+class HP_EASN_deep(CompressionModel):
     def __init__(self, N=192, M=192):
-        super(HP_GAS_deep, self).__init__(N)
+        super(HP_EASN_deep, self).__init__(N)
         self.N = N
         self.M = M
 
         self.g_a = nn.Sequential(
-            GAS_deep_enc(3, N),
-            GAS_deep_enc(N, N),
-            GAS_deep_enc(N, N),
+            EASN_deep_enc(3, N),
+            EASN_deep_enc(N, N),
+            EASN_deep_enc(N, N),
             conv(N, M),
         )
 
         self.g_s = nn.Sequential(
-            GAS_deep_dec(M, N),
-            GAS_deep_dec(N, N),
-            GAS_deep_dec(N, N),
+            EASN_deep_dec(M, N),
+            EASN_deep_dec(N, N),
+            EASN_deep_dec(N, N),
             deconv(N, 3),
         )
 

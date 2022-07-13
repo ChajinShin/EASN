@@ -24,7 +24,7 @@ test_dataset:
 
 model:
   # parameter
-  params: './codec_exp/ckpt/JA+GAS-deep_0.005.pth'
+  params: './codec_exp/ckpt/JA+EASN_deep_0.005.pth'
   N: 192
   M: 192
 

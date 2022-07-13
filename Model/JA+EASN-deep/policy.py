@@ -65,7 +65,7 @@ class Policy(Solver):
 
                 log = self.model.fit(img)
                 avg_meter.update(log)
-
+                
                 # every print step,
                 if ((step + 1) % self.opt.print_step) == 0:
                     # get last lr

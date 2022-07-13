@@ -1,7 +1,7 @@
 import torch
 import os
 from .Losses import RateDistortionLoss
-from .network import HP_GAS
+from .network import HP_EASN
 
 
 class Wrapper(object):
@@ -9,7 +9,7 @@ class Wrapper(object):
         self.opt = opt
         self.dev = dev
 
-        self.compression_net = HP_GAS(self.opt.model.N, self.opt.model.M).to(dev)
+        self.compression_net = HP_EASN(self.opt.model.N, self.opt.model.M).to(dev)
 
         # ------------------------------------------------------------------------------------------
         # optimizer settings
