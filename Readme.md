@@ -1,3 +1,6 @@
+# Expanded Adaptive Scaling Normalization for End to End Image Compression
+
+
 # Common Settings
 Modify the following options in  **./options.yml**.
 - use_cuda: True if using GPU
