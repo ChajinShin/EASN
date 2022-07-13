@@ -1,0 +1,46 @@
+# training or evaluation
+mode: 'train'    # train or test
+
+
+# dataset
+train_dataset:
+  folder_dir: '/home/user/dataset/vimeo_septuplet/sequences'
+  augmentation:
+    - 'HorizontalFlip'
+    - 'RandomCrop'
+    - 'ToTensor'
+  size: 256
+  batch_size: 16
+  num_workers: 8
+
+val_dataset:
+  folder_dir: '/home/user/dataset/COCO/val'
+  size: 256
+  batch_size: 16
+  num_workers: 4
+
+test_dataset:
+  folder_dir: '/home/user/dataset/Kodak_dataset'
+
+model:
+  # parameter
+  params: './codec_exp/ckpt/JA+EASN_0.005.pth'
+  N: 192
+  M: 192
+
+# training parameters
+train:
+  lr: 1e-4
+  aux_lr: 1e-3
+  lmbda: 0.005
+  epoch: 200
+  clip_max_norm: 1.0
+  factor: 0.5
+  patience: 10
+  threshold: 1e-4
+  load_optimizer: True
+  distortion: 'mse'   # 'mse' or 'ms-ssim'
+
+
+# misc
+print_step: 100    # iteration unit

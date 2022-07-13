@@ -1,0 +1,8 @@
+# device settings
+seed: 17                                                   # random seed
+use_cuda: True                                             # Use GPU
+gpu_idx: '1'                                               # GPU index
+
+# Model
+Model: 'HP+EASN'
+ExperimentName: './codec_exp'
