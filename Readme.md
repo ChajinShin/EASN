@@ -1,4 +1,6 @@
 # Expanded Adaptive Scaling Normalization for End to End Image Compression
+![psnr_kodak](./figure/psnr_result_kodak.jpg)
+
 
 
 # Common Settings
