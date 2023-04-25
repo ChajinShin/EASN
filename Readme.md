@@ -48,6 +48,9 @@ Modify the following options in **./Model/"Model_Name"/config.yml**.
 Link: [Download](https://yonsei-my.sharepoint.com/:f:/g/personal/chajin_o365_yonsei_ac_kr/EgzjXXdvMXBEpm2HMInAoGEBhXrlxLqaEIRKZu-G5mTBoQ?e=rvZstg)
 
 ## Setting
+For test dataset, we cut images to make the width and height multiple of 64 for all models including comparison model and traditional codec.
+
+
 Modify the following options in **./Model/"Model_Name"/config.yml**.
 - mode:  'test' for test
 - folder_dir:  dataset directory of test
