@@ -49,7 +49,8 @@ Link: [Download](https://yonsei-my.sharepoint.com/:f:/g/personal/chajin_o365_yon
 
 ## Setting
 For test dataset, we cut images to make the width and height multiple of 64 for all models including comparison models and traditional codec.
-
+Also, we have confirmed that zero padding is producing strange results with our pretrained weights.
+Please cut the test image to be a multiple of 64 in width and height, or utilize the method such as reflection padding.
 
 Modify the following options in **./Model/"Model_Name"/config.yml**.
 - mode:  'test' for test
