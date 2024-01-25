@@ -45,7 +45,7 @@ Modify the following options in **./Model/"Model_Name"/config.yml**.
 # Test
 
 ## Pretrained Parameters:
-Link: [Download](https://yonsei-my.sharepoint.com/:f:/g/personal/chajin_o365_yonsei_ac_kr/EgzjXXdvMXBEpm2HMInAoGEBhXrlxLqaEIRKZu-G5mTBoQ?e=rvZstg)
+Link: [Download](https://yonsei-my.sharepoint.com/:f:/g/personal/chajin_o365_yonsei_ac_kr/Ei6Z9JF1aWVMiwHvbjkR3gwB5M6lqetxcF1svGbVUPSDuw?e=xGuZgd)
 
 ## Setting
 For test dataset, we cut images to make the width and height multiple of 64 for all models including comparison models and traditional codec.
