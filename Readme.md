@@ -45,7 +45,7 @@ Modify the following options in **./Model/"Model_Name"/config.yml**.
 # Test
 
 ## Pretrained Parameters:
-Link: [Download](https://drive.google.com/drive/folders/1Z9XPG56e0CkdxjcA5M2ww5r5ELtmgJJt?usp=sharing)
+Link: [Download](https://drive.google.com/drive/folders/1IlfH_E06dp_GUnqj3wWefacgARVKxmJ5?usp=sharing)
 
 
 ## Setting
